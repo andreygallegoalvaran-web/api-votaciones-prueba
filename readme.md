@@ -1,105 +1,36 @@
-# API RESTful - Sistema de Votaciones
+# API RESTful - Sistema de Votaciones (Prueba Técnica)
 
-Esta es una API RESTful desarrollada en Python para gestionar un sistema de votaciones. Permite el registro de votantes y candidatos, garantiza la emisión de un único voto por ciudadano mediante validaciones transaccionales, y genera estadísticas precisas en tiempo real.
+Este proyecto es una API RESTful desarrollada para gestionar un sistema de votaciones seguro y confiable. Cumple con todos los requisitos técnicos establecidos, garantizando la integridad de los datos, la unicidad del voto por ciudadano y la generación de estadísticas precisas en tiempo real.
 
-## Tecnologías Utilizadas
+## Características Principales y Validaciones
 
-- **Framework:** FastAPI
+El sistema cumple con las siguientes restricciones exigidas:
+
+- **Integridad de Roles:** Un ciudadano registrado como votante no puede ser candidato, y viceversa.
+- **Voto Único:** El sistema bloquea transaccionalmente cualquier intento de voto duplicado por parte de un mismo elector.
+- **Validación de Datos:** Uso de `Pydantic` para asegurar que los correos electrónicos tengan el formato correcto y los datos requeridos no estén vacíos.
+- **Manejo de Errores:** Respuestas HTTP claras (400 Bad Request, 404 Not Found) para guiar al usuario o al frontend sobre por qué falló una petición.
+
+## Stack Tecnológico
+
+- **Framework Web:** FastAPI (Elegido por su rendimiento, asincronía nativa y generación automática de documentación).
 - **Lenguaje:** Python 3.10+
-- **Base de Datos:** SQLite (para facilitar la ejecución local sin configuración de servidores externos)
+- **Base de Datos:** SQLite (Garantiza una ejecución local inmediata sin necesidad de configurar contenedores o servidores externos).
 - **ORM:** SQLAlchemy
-- **Validación de Datos:** Pydantic
+- **Validación:** Pydantic & email-validator
 
----
+## Estructura del Proyecto
 
-## ⚙️ Instrucciones para ejecutar el proyecto localmente
+El código sigue una arquitectura limpia separando responsabilidades:
 
-Sigue estos pasos para levantar el entorno en tu máquina:
-
-**1. Clonar el repositorio**
-\`\`\`bash
-git clone <URL_DE_TU_REPOSITORIO_AQUI>
-cd <NOMBRE_DE_LA_CARPETA>
-\`\`\`
-
-**2. Crear y activar un entorno virtual (Recomendado)**
-
-- En Windows:
-  \`\`\`bash
-  python -m venv venv
-  venv\Scripts\activate
-  \`\`\`
-- En macOS/Linux:
-  \`\`\`bash
-  python3 -m venv venv
-  source venv/bin/activate
-  \`\`\`
-
-**3. Instalar las dependencias**
-\`\`\`bash
-pip install -r requirements.txt
-\`\`\`
-
-**4. Ejecutar el servidor web**
-\`\`\`bash
-uvicorn main:app --reload
-\`\`\`
-
-La API estará disponible en `http://127.0.0.1:8000`.
-Puedes acceder a la documentación interactiva (Swagger UI) en `http://127.0.0.1:8000/docs`.
-
----
-
-## Ejemplos de uso del API (cURL)
-
-A continuación, ejemplos para interactuar con los endpoints principales usando `curl` desde la terminal. También puedes probarlos directamente desde la interfaz de Swagger en la ruta `/docs`.
-
-**1. Registrar un nuevo votante**
-\`\`\`bash
-curl -X 'POST' \
- 'http://127.0.0.1:8000/voters' \
- -H 'accept: application/json' \
- -H 'Content-Type: application/json' \
- -d '{
-"name": "Juan Perez",
-"email": "juan.perez@email.com"
-}'
-\`\`\`
-
-**2. Registrar un candidato**
-\`\`\`bash
-curl -X 'POST' \
- 'http://127.0.0.1:8000/candidates' \
- -H 'accept: application/json' \
- -H 'Content-Type: application/json' \
- -d '{
-"name": "Maria Gomez",
-"party": "Partido Innovación"
-}'
-\`\`\`
-
-**3. Emitir un voto**
-\`\`\`bash
-curl -X 'POST' \
- 'http://127.0.0.1:8000/votes' \
- -H 'accept: application/json' \
- -H 'Content-Type: application/json' \
- -d '{
-"voter_id": 1,
-"candidate_id": 1
-}'
-\`\`\`
-
----
-
-## Estadísticas Generadas
-
-_A continuación se muestran las capturas de los resultados obtenidos a través del endpoint `/votes/statistics` tras realizar pruebas con múltiples votantes:_
-
-**(Reemplaza este texto por tu imagen: En GitHub, puedes simplemente arrastrar y soltar la imagen aquí al editar el README)**
-
-![Estadísticas de la votación](ruta/a/tu/imagen.png)
-
----
-
-_Desarrollado por Andrey para prueba técnica._
+```text
+api-votaciones-prueba/
+├── activos/             # Evidencias y capturas de funcionamiento
+├── src/                 # Código fuente principal de la API
+│   ├── database.py      # Configuración y conexión del motor SQLite
+│   ├── main.py          # Endpoints, controladores y lógica de negocio
+│   ├── models.py        # Modelos de entidades de base de datos
+│   └── schemas.py       # Esquemas de validación de entrada/salida
+├── readme.md            # Documentación técnica
+└── requisitos.txt       # Dependencias exactas del proyecto
+```
