@@ -34,4 +34,4 @@ api-votaciones-prueba/
 ├── readme.md            # Documentación técnica
 └── requisitos.txt       # Dependencias exactas del proyecto
 ```
-ota: para ingresar a la API de Sistema de Votaciones ingresa por este enlace http://127.0.0.1:8000/docs
+Nota: para ingresar a la API de Sistema de Votaciones ingresa por este enlace http://127.0.0.1:8000/docs
