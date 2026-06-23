@@ -35,7 +35,9 @@ api-votaciones-prueba/
 └── requisitos.txt       # Dependencias exactas del proyecto
 ```
 ara la activacion de la api ingresar en la terminal los siguentes codigos:
+
 codigo numero 1: .\venv\Scripts\activate
+
 codigo numero 2: uvicorn src.main:app --reload
 
 Nota: para ingresar a la API de Sistema de Votaciones ingresa por este enlace http://127.0.0.1:8000/docs
